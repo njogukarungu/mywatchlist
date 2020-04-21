@@ -2,10 +2,15 @@
 {% import 'macros.html' as macro%}
 
 {% block content%}
-     <!-- <h3>Popular movies</h3>
+    <div class="container">
+        <form> 
+            <input type="text" name="movie_query" placeholder="search for a movie"  class="form_control">
+            <input type="submit" value="Submit" class="btn btn-default">    
+        </form>
+    </div>
+    <h3>Popular movies</h3>
     <ul>
         {{macro.displayMovieList(popular)}}
-
     </ul>
     <h3>UPCOMING</h3>
     <ul>
@@ -14,15 +19,11 @@
     <h3>Displaying</h3>
     <ul>
         {{macro.displayMovieList(now_showing)}}
-    </ul> -->
+    </ul>
 
-<div class="container">
-    <form> 
-        <input type="text" name="movie_query" placeholder="search for a movie"  class="form_control">
-        <input type="submit" value="Submit" class="btn btn-default">    
-    </form>
 
-</div>
+
+
 
 
 {% endblock%}
