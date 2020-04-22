@@ -1,14 +1,18 @@
-from .models import movie
-from app import app
-import urllib, json
-from contextlib import closing
-Movie = movie.Movie
-api_key = app.config['MOVIE_API_KEY']
-base_url = app.config['MOVIE_API_BASE_URL']
+from .models import Movie
+import urllib.request, json
+
+
+api_key = None
+base_url =None
+
+def configure_request(app):
+    global api_key,base_url
+    api_key = app.config['MOVIE_API_KEY']
+    base_url = app.config['MOVIE_API_BASE_URL']
 
 def getMovies(category):
     get_movies_url = base_url.format(category, api_key)
-    with closing(urllib.urlopen(get_movies_url)) as url:
+    with urllib.request.urlopen(get_movies_url) as url:
         get_movies_data = url.read()
         get_movies_response = json.loads(get_movies_data)
         
@@ -37,7 +41,7 @@ def processResults(movie_list):
 
 def search_movie(movie_name):
     search_movie_url = 'https://api.themoviedb.org/3/search/movie?api_key={}&query={}'.format(api_key,movie_name)
-    with closing(urllib.urlopen(search_movie_url)) as url:
+    with urllib.request.urlopen(search_movie_url) as url:
         search_movie_data = url.read()
         search_movie_data_response = json.loads(search_movie_data)
         
